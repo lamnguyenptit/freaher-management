@@ -39,7 +39,7 @@ public class FresherServiceImpl implements FresherService {
     @Override
     public Fresher update(Fresher param){
         Fresher fresher = findFresherById(param.getId());
-        programmingLanguageService.findProgrammingLanguageById(param.getProgrammingLanguage().getId());
+        param.setProgrammingLanguage(programmingLanguageService.findProgrammingLanguageById(param.getProgrammingLanguage().getId()));
         if(param.getCenter() != null)
             centerService.findCenterById(param.getCenter().getId());
         if (fresher != null){
@@ -50,7 +50,7 @@ public class FresherServiceImpl implements FresherService {
             fresher.setCenter(param.getCenter());
             fresher.setResults(param.getResults());
             fresher.setProgrammingLanguage(param.getProgrammingLanguage());
-            fresherRepository.saveAndFlush(param);
+            fresherRepository.saveAndFlush(fresher);
         }
         return fresher;
     }

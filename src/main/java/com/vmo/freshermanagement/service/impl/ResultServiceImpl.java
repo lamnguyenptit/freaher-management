@@ -1,6 +1,5 @@
 package com.vmo.freshermanagement.service.impl;
 
-import com.vmo.freshermanagement.exception.ResourceNotFoundException;
 import com.vmo.freshermanagement.model.Fresher;
 import com.vmo.freshermanagement.model.Result;
 import com.vmo.freshermanagement.repository.ResultRepository;
@@ -31,8 +30,6 @@ public class ResultServiceImpl implements ResultService {
     public double calculatePoint(int fresherId){
         fresherService.findFresherById(fresherId);
         List<Result> results = resultRepository.findAllByFresher_Id(fresherId);
-        if (results.isEmpty())
-            throw new ResourceNotFoundException("Fresher chưa có điểm");
         double averagePoint = 0;
         for (Result result : results)
             averagePoint += result.getPoint();
